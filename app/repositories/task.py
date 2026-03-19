@@ -12,7 +12,7 @@ class TaskRepository:
 
     def get_all(self) -> list[TaskORM]:
         """Получить все записи task"""
-        return self.db.scalars(select(TaskORM)).all()
+        return list(self.db.scalars(select(TaskORM)).all())
 
     def get_by_id(self, task_id: str) -> TaskORM | None:
         """Получить запись task по id"""
