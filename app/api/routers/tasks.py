@@ -4,7 +4,6 @@ from app.api.dependencies import get_task_service
 from app.schemas.task import TaskCreate, TaskRead, TaskUpdate
 from app.services.task import TaskNotFoundError, TaskService
 
-
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 

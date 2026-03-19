@@ -1,7 +1,7 @@
 import logging
 
 
-def configure_logging():
+def configure_logging() -> None:
     root_logger = logging.getLogger()
     if not root_logger.handlers:
         logging.basicConfig(

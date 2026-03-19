@@ -3,11 +3,11 @@ from time import perf_counter
 
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import RequestResponseEndpoint
 
 from app.api.router import api_router
 from app.core.config import get_settings
 from app.core.logging import configure_logging
-
 
 configure_logging()
 
@@ -25,8 +25,13 @@ app.add_middleware(
 
 cnt = 0
 
-@app.middleware("http")  # log_requests выполнится до и после обработки каждого HTTP-запроса
-async def log_requests(request: Request, call_next) -> Response:
+
+# Выполняется до и после обработки каждого HTTP-запроса.
+@app.middleware("http")
+async def log_requests(
+    request: Request,
+    call_next: RequestResponseEndpoint,
+) -> Response:
     started_at = perf_counter()
     try:
         response: Response = await call_next(request)  # Работа самого эндпоинта
@@ -50,8 +55,12 @@ async def log_requests(request: Request, call_next) -> Response:
     )
     return response
 
+
 @app.middleware("http")
-async def http_counter(request: Request, call_next) -> Response:
+async def http_counter(
+    request: Request,
+    call_next: RequestResponseEndpoint,
+) -> Response:
     global cnt
     cnt += 1
     response: Response = await call_next(request)

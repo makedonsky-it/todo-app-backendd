@@ -1,0 +1,19 @@
+[tool.ruff]
+# Под какую версию Python проверять синтаксис и правила
+target-version = "py314"
+# Максимальная длина строки
+line-length = 88
+
+[tool.ruff.lint]
+# Какие группы правил включены: E - pycodestyle, F - pyflakes, I - сортировка импортов
+select = ["E", "F", "I"]
+
+[tool.ruff.format]
+# Использовать двойные кавычки
+quote-style = "double"
+# Использовать пробелы вместо табов
+indent-style = "space"
+# Оставлять "магические" висячие запятые для удобного переноса строк
+skip-magic-trailing-comma = false
+# Автоматически выбрать стиль перевода строк под среду/файл
+line-ending = "auto"
